@@ -1,0 +1,95 @@
+---
+import TechnologiesCard from './TechnologiesCard.astro';
+
+interface Props {
+    pic: string;
+    title: string;
+    desc: string;
+    technologies: string[];
+    application_type: string;
+    href: string
+}
+const { pic, title, desc, technologies, application_type, href } = Astro.props;
+---
+
+<a
+    class="flex flex-col rounded-2xl shadow-2xl hover:cursor-pointer items-center overflow-hidden h-full group"
+    href={href}
+>
+    <div
+        class="relative h-21 sm:h-56 md:h-68 w-full overflow-hidden rounded-t-2xl"
+    >
+        <img
+            class="w-full h-full object-center transition-transform duration-300 ease-in-out group-hover:scale-110"
+            src={pic}
+        />
+        <div
+            class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"
+        >
+            <div
+                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            >
+                <div
+                    class="flex items-center gap-2 px-5 py-2.5 bg-black text-white rounded-full font-semibold text-sm shadow-lg transform"
+                >
+                    <div>View Details</div>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-arrow-up-right w-4 h-4"
+                        ><path d="M7 7h10v10"></path><path d="M7 17 17 7"
+                        ></path></svg
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-5 gap-y-2 flex flex-col">
+        <div class="font-bold text-xl md:text-2xl">{title}</div>
+        <div>{desc}</div>
+
+        <!-- Technologies -->
+        <div class="flex gap-x-4">
+            {technologies.length > 3?
+            <TechnologiesCard title={technologies[0]}></TechnologiesCard>
+            <TechnologiesCard title={technologies[1]}></TechnologiesCard>
+            <TechnologiesCard title={technologies[2]}></TechnologiesCard>
+            <div>
+                +{technologies.length-3}
+            </div>:
+            technologies.length == 3 ?
+            <TechnologiesCard title={technologies[0]}></TechnologiesCard>
+            <TechnologiesCard title={technologies[1]}></TechnologiesCard>
+            <TechnologiesCard title={technologies[2]}></TechnologiesCard>
+            :
+            technologies.length == 2 ?
+            <div>
+                <TechnologiesCard title={technologies[0]}></TechnologiesCard>
+                <TechnologiesCard title={technologies[1]}></TechnologiesCard>
+            </div>
+            :
+            <div>
+                <TechnologiesCard title={technologies[0]}></TechnologiesCard>
+            </div>
+            }
+        </div>
+        
+
+        <div></div>
+        <div class="border-t-2 pt-4 flex justify-between border-gray-200">
+            <div>{application_type}</div>
+            <div
+                class="flex items-center gap-1 bg-linear-to-r from-[#22c55e] to-[#16a34a] dark:from-[#ADFF2F] dark:to-[#22c55e] text-transparent bg-clip-text text-xs font-semibold group-hover:gap-2 transition-all"
+            >
+                Learn More
+            </div>
+        </div>
+    </div>
+</a>

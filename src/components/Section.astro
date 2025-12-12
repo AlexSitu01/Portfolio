@@ -1,0 +1,19 @@
+---
+interface Props {
+    id?: string;
+    isWhite: boolean;
+    title: string
+}
+const { id, isWhite, title } = Astro.props;
+---
+
+<div
+    id={id}
+    class={`py-10 px-20 max-md:flex-col ${isWhite ? "bg-white" : "bg-gray-50"}`}
+>
+    <div>
+        <div class="font-bold text-3xl">{title}</div>
+        <div class="mt-2 h-1 w-20 bg-green-500 md:mt-5"></div>
+    </div>
+    <slot class=""/>
+</div>

@@ -1,0 +1,13 @@
+---
+interface Props{
+    icon:string, 
+    title: string
+}
+const {icon, title} = Astro.props
+---
+<div class="flex justify-center gap-x-2 px-4 py-2 md:px-6 md:py-3 shadow hover:shadow-lg transition-all duration-200 border-green-500/50 border-2 items-center rounded-xl bg-white select-none">
+    <div>
+        <img src={icon} style="color: transparent;" loading="lazy" width="32" height="32" draggable="false" class="select-none"/>
+    </div>
+    <div class="text-xs md:text-sm font-semibold text-black/70 dark:text-white/80 select-none">{title}</div>
+</div>

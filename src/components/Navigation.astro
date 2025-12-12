@@ -1,12 +1,54 @@
-<div
-    class="bg-white rounded-full m-10 mb-10 px-10 py-3 justify-between sticky flex"
+---
+
+---
+
+<nav
+    class="px-10 z-50 py-5 justify-between fixed top-0 flex max-w-full container"
 >
-    <div class="text-xl font-bold text-green-500">Alex Situ</div>
-    <div class="flex gap-x-5 font-semibold text-lg [&>a]:hover:text-green-500 [&>a]:hover:cursor-pointer">
-        <a href="#about">About</a>
-        <a>Experience </a>
-        <a>Skills </a>
-        <a>Projects </a>
-        <a>Contacts </a>
+    <div
+        class="flex flex-row rounded-full bg-white/30 gap-3 px-10 backdrop-blur-xl py-3 max-md:flex-col w-full justify-between max-md:rounded-xl max-md:gap-0"
+    >
+        <div class="flex">
+            <a class="text-xl font-bold text-green-500 hover:cursor" href="#"
+                >Alex Situ</a
+            >
+            <button id="menu-btn" class="ml-auto md:hidden cursor-pointer"
+                ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="size-6"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- content to show from collapsable button -->
+        <div
+            id="menu"
+            class="flex gap-5 font-semibold text-lg [&>a]:hover:text-green-500 [&>a]:hover:cursor-pointer [&>a]:transition-all max-md:flex-col text-center max-md:gap-3 max-md:duration-300 overflow-hidden max-md:max-h-0 max-h-none"
+        >
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#certificates">Certificates</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
     </div>
-</div>
+    <script>
+        const btn = document.getElementById("menu-btn");
+        const menu = document.getElementById("menu");
+        if (btn && menu) {
+            btn.addEventListener("click", () => {
+                menu.classList.toggle("max-md:max-h-0");
+                menu.classList.toggle("max-md:max-h-96"); // enough height for open state
+            });
+        }
+    </script>
+</nav>
