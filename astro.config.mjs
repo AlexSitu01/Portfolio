@@ -11,6 +11,5 @@ export default defineConfig({
   },
 
   integrations: [react()],
-  site: "https://AlexSitu01.github.io",
-  base: "/"
+  site: "https://alexsitu.cc",
 });
