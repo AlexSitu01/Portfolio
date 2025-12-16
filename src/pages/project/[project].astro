@@ -1,0 +1,128 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ProjectsCarousel from "@/components/ui/ProjectsCarousel.tsx";
+import SkillsCards from "@/components/SkillsCards.astro";
+import TechStackIcons from "@/assets/TechStack.json" assert { type: "json" };
+import Navigation from "@/components/Navigation.astro";
+export function getStaticPaths() {
+  const pages = [
+    {
+      project: "movie",
+      title: "Film Archive",
+      desc: "A mobile app that allows users to browse detailed pages for movies. This includes plot summaries, cast and crew information, photos, release dates, genres, runtimes, gross revenue and similar movies. Users can bookmark and rate movies that they are interested and see what their friends think about popular movies as well.",
+      roles: ["Frontend Engineer", "Backend Engineer"],
+      pictures: [
+        "/assets/project_pictures/movie/home.PNG",
+        "/assets/project_pictures/movie/bookmarks.PNG",
+        "/assets/project_pictures/movie/search.PNG",
+        "/assets/project_pictures/movie/movie_card.PNG",
+        "/assets/project_pictures/movie/rec.PNG",
+        "/assets/project_pictures/movie/profiles.PNG",
+      ],
+      techStack: [TechStackIcons.react_native, TechStackIcons.python, TechStackIcons.typescript, TechStackIcons.docker, TechStackIcons.fastapi, TechStackIcons.supabase],
+      bullets: ["Highlights and features trending movies.", "Integrated a prerendered recommendation system built with a random forest model.", "Fast page performance with optimized images, caching and lazy loading.", "Dynamic bookmarking system that automatically tracks and stores all of the users bookmarked, completed and dropped movies with ratings if applicable.", "Search bar with autofill capabilities to query for any movies.", "Profile system that allows users to view the ratings of others."],
+    },
+    {
+      project: "products",
+      title: "Astro products",
+      text: "We have lots of products for you",
+    },
+    {
+      project: "products/astro-handbook",
+      title: "The ultimate Astro handbook",
+      text: "If you want to learn Astro, you must read this book.",
+    },
+  ];
+
+  return pages.map(
+    ({ project, title, desc, pictures, techStack, bullets, roles }) => {
+      return {
+        params: { project },
+        props: { title, desc, pictures, techStack, bullets, roles },
+      };
+    },
+  );
+}
+
+const { title, desc, pictures, techStack, bullets, roles } = Astro.props;
+---
+
+<Layout>
+  <Navigation />
+  <div
+    class="flex flex-col pt-20 px-15 overflow-x-clip gap-y-8 pb-28 md:px-96 bg-white mt-10"
+  >
+    <ProjectsCarousel client:only="react" pics={pictures ?? []} />
+
+    <div class="flex flex-col gap-y-3">
+      <div class="text-green-500 font-bold text-2xl md:text-3xl">{title}</div>
+      <div class="text-sm md:text-lg text-black/70 w-full font-mono">
+        {desc}
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-y-3">
+      {
+        roles && roles.length > 0 && (
+          <div class="font-bold text-xl md:text-2xl">
+            Roles and Responsibilities
+          </div>
+        )
+      }
+
+      <div class="flex gap-2 font-mono font-semibold">
+        {
+          roles &&
+            roles.map((role) => {
+              return (
+                <div class="mt-3 px-3 py-2 bg-transparent text-black dark:text-white/70 rounded-full text-xs md:text-sm font-medium border-2 border-black/70 w-min whitespace-nowrap">
+                  {role}
+                </div>
+              );
+            })
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-y-3">
+      {
+        techStack && techStack.length > 0 && (
+          <div class="font-bold text-xl md:text-2xl">Tech Stack</div>
+        )
+      }
+      <div class="flex flex-wrap gap-3 md:gap-6">
+        {
+          techStack &&
+            techStack.map((tech) => {
+              return <SkillsCards icon={tech.icon} title={tech.title} />;
+            })
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-y-3 font-mono">
+      {
+        bullets && bullets.length > 0 && (
+          <div class="font-bold text-xl md:text-2xl">Core Features</div>
+        )
+      }
+      <div class="space-y-3 md:space-y-4">
+        {
+          bullets &&
+            bullets.map((bullet) => {
+              return (
+                <div class="flex items-center gap-3">
+                  <div class="text-[#22c55e] dark:text-[#ADFF2F] mt-[3px] text-2xl md:text-3xl">
+                    •
+                  </div>
+                  <div class="text-sm md:text-lg leading-relaxed text-black/70 ">
+                    {bullet}
+                  </div>
+                </div>
+              );
+            })
+        }
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,19 +1,13 @@
 ---
-import Navigation from "./Navigation.astro";
-import ProjectCard from "./ProjectCard.astro";
-import SchoolCards from "./SchoolCards.astro";
-import Section from "./Section.astro";
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel";
+import Navigation from "../components/Navigation.astro";
+import ProjectCard from "../components//ProjectCard.astro";
+import SchoolCards from "../components//SchoolCards.astro";
+import Section from "../components//Section.astro";
 import CertificatesCarousel from "@/components/ui/CertificatesCarousel.jsx";
-import SkillsCards from "./SkillsCards.astro";
-import ContactCard from "./ContactCard.astro";
-import ExperienceCard from "./ExperienceCard.astro";
+import SkillsCards from "../components//SkillsCards.astro";
+import ContactCard from "../components//ContactCard.astro";
+import ExperienceCard from "../components//ExperienceCard.astro";
+import TechStackIcons from "@/assets/TechStack.json" assert {type: "json"}
 ---
 
 <div class="">
@@ -22,7 +16,7 @@ import ExperienceCard from "./ExperienceCard.astro";
     <div
         class="mt-20 p-10 flex justify-between gap-10 min-h-screen max-md:flex-col"
     >
-        <div class="bg-white rounded-2xl w-3/4 p-8 shadow-xl h-min">
+        <div class="bg-white rounded-2xl w-full p-8 shadow-xl h-min">
             <div class="text-2xl font-bold">Hi there! I'm</div>
             <div class="text-5xl font-bold text-green-500 mt-3">Alex Situ</div>
             <div class="font-semibold mt-3">Software Developer</div>
@@ -80,8 +74,8 @@ import ExperienceCard from "./ExperienceCard.astro";
         </div>
         <div class="w-full h-min flex justify-center">
             <img
-                class="w-3/4 rounded-2xl"
-                src="https://source.widen.net/content/7yk7jmsaxj/webp/WRG-2241030_3-ft-Nordic-Frost-Decorated-Tree-Kit_SSC.webp?position=c&color=ffffffff&quality=100&u=7mzq6p"
+                class="w-1/2 rounded-2xl"
+                src="/public/assets/headshot.jpg"
             />
         </div>
     </div>
@@ -106,14 +100,17 @@ import ExperienceCard from "./ExperienceCard.astro";
 
     <!-- Experience -->
     <Section isWhite={false} title="Experience" id="experience">
-        <div class="flex flex-col mt-10">
+        <div class="flex flex-col mt-10 gap-y-5">
             <ExperienceCard
                 title="Research Assistant"
                 years="Winter 2024"
                 company="California State Polytechnic University Pomona"
-                desc="Researched different methods of using machine learning to detect and label animals given wildlife cam footage."
-                bullets={["Conducted comprehensive literature reviews by analyzing over 20 scholarly articles to evaluate the efficiency of various neural network architectures, leading to informed selection of optimal models for implementation.", "Facilitated knowledge sharing sessions with team members, synthesizing complex research findings into clear documentation that accelerated the learning curve for new team members and enhanced project productivity by 20%."]}
+                bullets={[
+                    "Conducted comprehensive literature reviews by analyzing over 20 scholarly articles to evaluate the efficiency of various neural network architectures, leading to informed selection of optimal models for implementation.",
+                    "Facilitated knowledge sharing sessions with team members, synthesizing complex research findings into clear documentation that accelerated the learning curve for new team members and enhanced project productivity by 20%.",
+                ]}
             />
+                    
         </div>
     </Section>
 
@@ -123,18 +120,18 @@ import ExperienceCard from "./ExperienceCard.astro";
             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10"
         >
             <ProjectCard
-                pic="https://www.uxdesigninstitute.com/blog/wp-content/uploads/2022/06/34_Builtin-1.png"
-                title="Test"
-                desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae officia porro blanditiis maiores tenetur praesentium voluptatem adipisci? Distinctio adipisci nihil, eius, aut earum at rerum voluptate ad error odit autem."
-                technologies={["React", "Next.js", "test", "test"]}
-                application_type="Website"
-                href="#education"
+                pic="/assets/project_pictures/movie/home.PNG"
+                title="Film Archive"
+                desc="A mobile app that allows users to browse detailed pages for movies. This includes plot summaries, cast and crew information, photos, release dates, genres, runtimes, gross revenue and similar movies. Users can bookmark and rate movies that they are interested and see their friends ratings."
+                technologies={["React Native", "TypeScript", "Python", "Fast API", "Docker", "Supabase"]}
+                application_type="Mobile App"
+                href="./project/movie"
             />
         </div>
     </Section>
 
     <!-- Certificates -->
-    <Section isWhite={false} title="Certificates" id="certificates">
+    <Section isWhite={true} title="Certificates" id="certificates">
         <div class="flex justify-center">
             <CertificatesCarousel client:only="react" />
         </div>
@@ -143,18 +140,9 @@ import ExperienceCard from "./ExperienceCard.astro";
     <!-- Skills -->
     <Section isWhite={true} title="Skills and Languages" id="skills">
         <div class="flex flex-wrap gap-3 md:gap-6 mt-10">
-            <SkillsCards
-                icon="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/2048px-Python-logo-notext.svg.png"
-                title="Python"
-            />
-            <SkillsCards
-                icon="https://www.svgrepo.com/show/303388/java-4-logo.svg"
-                title="Java"
-            />
-            <SkillsCards
-                icon="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png"
-                title="React"
-            />
+            {Object.values(TechStackIcons).map((value) => {
+                return <SkillsCards icon={value.icon} title={value.title}/>
+            })}
         </div>
     </Section>
 

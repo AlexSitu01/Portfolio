@@ -20,7 +20,7 @@ const { pic, title, desc, technologies, application_type, href } = Astro.props;
         class="relative h-21 sm:h-56 md:h-68 w-full overflow-hidden rounded-t-2xl"
     >
         <img
-            class="w-full h-full object-center transition-transform duration-300 ease-in-out group-hover:scale-110"
+            class="w-full h-full object-contain transition-transform duration-300 ease-in-out group-hover:scale-110"
             src={pic}
         />
         <div
@@ -53,32 +53,20 @@ const { pic, title, desc, technologies, application_type, href } = Astro.props;
     </div>
     <div class="p-5 gap-y-2 flex flex-col">
         <div class="font-bold text-xl md:text-2xl">{title}</div>
-        <div>{desc}</div>
+        <div class="line-clamp-3">{desc}</div>
 
         <!-- Technologies -->
-        <div class="flex gap-x-4">
-            {technologies.length > 3?
-            <TechnologiesCard title={technologies[0]}></TechnologiesCard>
-            <TechnologiesCard title={technologies[1]}></TechnologiesCard>
-            <TechnologiesCard title={technologies[2]}></TechnologiesCard>
-            <div>
-                +{technologies.length-3}
-            </div>:
-            technologies.length == 3 ?
-            <TechnologiesCard title={technologies[0]}></TechnologiesCard>
-            <TechnologiesCard title={technologies[1]}></TechnologiesCard>
-            <TechnologiesCard title={technologies[2]}></TechnologiesCard>
-            :
-            technologies.length == 2 ?
-            <div>
-                <TechnologiesCard title={technologies[0]}></TechnologiesCard>
-                <TechnologiesCard title={technologies[1]}></TechnologiesCard>
-            </div>
-            :
-            <div>
-                <TechnologiesCard title={technologies[0]}></TechnologiesCard>
-            </div>
+        <div class="flex gap-x-4 line-clamp-1">
+            {technologies && technologies.slice(0, 3).map((tech) => {
+                return <TechnologiesCard title={tech}></TechnologiesCard>
+            })}
+            {
+                technologies && technologies.length > 3 &&
+                <div>
+                    +{technologies.length - 3}
+                </div>
             }
+
         </div>
         
 

@@ -1,14 +1,80 @@
 ---
 interface Props {
-    title: string
-    desc: string
-    company: string
-    bullets: string[]
-    years: string
+    title: string;
+    company: string;
+    bullets: string[];
+    years: string;
 }
-const {title, desc, company, bullets, years} = Astro.props
+const { title, company, bullets, years } = Astro.props;
+
+// Generate unique IDs for this instance
+const id = crypto.randomUUID();
+const btnId = `btn-${id}`;
+const menuId = `menu-${id}`;
+const carrotId = `carrot-${id}`;
 ---
 
-<div>
+<button
+    id={btnId}
+    class="flex flex-col shadow-xl rounded-xl p-3 md:p-6 group hover:cursor-pointer gap-y-2 bg-white"
+>
+    <div class="flex justify-between items-center">
+        <div class="flex flex-col items-start">
+            <div class="flex gap-x-3">
+                <div class="font-bold">{title}</div>
+                <div
+                    class="text-green-500 font-semibold flex gap-x-1 items-center"
+                >
+                    <div class="">@</div>
+                    <div class="underline">{company}</div>
+                </div>
+            </div>
+            <div class="font-bold text-sm">
+                {years}
+            </div>
+        </div>
 
-</div>
+        <div class="" id={carrotId}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-5"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m4.5 15.75 7.5-7.5 7.5 7.5"></path>
+            </svg>
+        </div>
+    </div>
+    <ul
+        class="flex-col items-start overflow-hidden max-h-0 transition-all hidden gap-y-1"
+        id={menuId}
+    >
+        {
+            bullets.map((item) => {
+                return <li>{item}</li>;
+            })
+        }
+    </ul>
+</button>
+
+<script define:vars={{ btnId, menuId, carrotId }}>
+    document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById(btnId);
+        const carrot = document.getElementById(carrotId);
+        const menu = document.getElementById(menuId);
+        if (btn && menu && carrot) {
+            btn.addEventListener("click", () => {
+                menu.classList.toggle("max-h-0");
+                menu.classList.toggle("max-h-screen");
+                menu.classList.toggle("flex");
+                menu.classList.toggle("hidden");
+                carrot.classList.toggle("rotate-180");
+            });
+        }
+    });
+</script>
