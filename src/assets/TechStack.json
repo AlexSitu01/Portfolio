@@ -47,5 +47,13 @@
     "nativewind": {
         "icon": "https://pbs.twimg.com/profile_images/1917982964413292545/GKI_A1tp.jpg",
         "title": "Native Wind CSS"
+    },
+    "javascript": {
+        "icon": "https://www.svgrepo.com/show/303206/javascript-logo.svg",
+        "title": "JavaScript"
+    },
+    "svelte": {
+        "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThW8nrazXMHVgJ185S1Vg5uYsg_jtrCwRa3w&s",
+        "title": "Svelte"
     }
 }
