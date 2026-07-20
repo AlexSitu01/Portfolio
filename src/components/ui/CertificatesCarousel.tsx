@@ -18,7 +18,7 @@ export default function CertificatesCarousel() {
             <CarouselContent >
                 <CarouselItem>
                     <div className="p-2 bg-white rounded-xl shadow pl-2">
-                        <img className="" src="src\assets\certif.png"></img>
+                        <img className="" src="/assets/certif.png"></img>
                     </div>
                 </CarouselItem>
         
